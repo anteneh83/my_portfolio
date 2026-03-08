@@ -40,43 +40,130 @@ export default function Projects() {
                     <ProjectScene onSelect={setSelectedProject} />
                 </ScrollReveal>
 
-                {/* Featured Projects — ZemaHub & NewsBrief */}
-                {projects.filter((p) => p.featured).map((proj, fi) => (
+                {/* Featured Projects Grid (2 columns for ZemaHub & NewsBrief) */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    {projects.filter((p) => p.featured && p.id <= 2).map((proj, fi) => (
+                        <ScrollReveal
+                            key={proj.id}
+                            direction={fi % 2 === 0 ? "left" : "right"}
+                            delay={0.2}
+                        >
+                            <motion.div
+                                whileHover={{ y: -4 }}
+                                className="relative glass rounded-2xl p-6 md:p-7 cursor-pointer overflow-hidden transition-all h-full flex flex-col group"
+                                onClick={() => setSelectedProject(proj)}
+                                style={{
+                                    border: `1px solid ${proj.color}20`,
+                                    boxShadow: `0 0 30px ${proj.color}08`,
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.border = `1px solid ${proj.color}`;
+                                    e.currentTarget.style.boxShadow = `0 0 40px ${proj.color}25`;
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.border = `1px solid ${proj.color}20`;
+                                    e.currentTarget.style.boxShadow = `0 0 30px ${proj.color}08`;
+                                }}
+                            >
+                                {/* Featured badge */}
+                                <span className="absolute top-4 right-4 text-[10px] font-bold px-2 py-0.5 rounded-full z-10"
+                                    style={{ background: `${proj.color}15`, color: proj.color, border: `1px solid ${proj.color}30` }}>
+                                    ⭐ FEATURED
+                                </span>
+
+                                <div className="relative z-10 flex flex-col h-full">
+                                    <h3 className="font-heading text-xl md:text-2xl font-bold text-white mb-1">{proj.title}</h3>
+                                    <p className="text-xs font-semibold mb-3 tracking-wider uppercase" style={{ color: proj.color }}>{proj.role}</p>
+                                    <p className="text-white/60 leading-relaxed mb-5 text-xs md:text-sm line-clamp-3">{proj.description}</p>
+
+                                    <div className="mt-auto">
+                                        <div className="flex flex-wrap gap-1.5 mb-5">
+                                            {proj.tech.slice(0, 4).map((t) => (
+                                                <span key={t} className="text-[10px] px-2 py-0.5 rounded-md font-semibold"
+                                                    style={{ background: `${proj.color}15`, color: proj.color }}>
+                                                    {t}
+                                                </span>
+                                            ))}
+                                            {proj.tech.length > 4 && (
+                                                <span className="text-[10px] text-white/30 flex items-center">+{proj.tech.length - 4}</span>
+                                            )}
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-2 mb-5">
+                                            {(proj.stats || []).slice(0, 4).map((stat) => (
+                                                <div key={stat.label} className="bg-white/5 rounded-lg p-2 text-center border border-white/5 leading-tight">
+                                                    <p className="text-white font-bold text-[10px] truncate">{stat.value}</p>
+                                                    <p className="text-white/30 text-[9px] uppercase tracking-tighter">{stat.label}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <div className="flex gap-2">
+                                            <a
+                                                href={proj.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                onClick={(e) => e.stopPropagation()}
+                                                className="flex-1 text-center py-2 rounded-lg text-xs font-bold text-white transition-all"
+                                                style={{ background: `linear-gradient(135deg, ${proj.color}, #F97316)` }}
+                                            >
+                                                DEMO
+                                            </a>
+                                            <a
+                                                href={proj.github}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                onClick={(e) => e.stopPropagation()}
+                                                className="flex-1 text-center py-2 rounded-lg text-xs font-bold border border-white/10 text-white hover:border-[#F97316] transition-all"
+                                            >
+                                                GITHUB
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </ScrollReveal>
+                    ))}
+                </div>
+
+                {/* Third Featured Project (Wekil AI) - Full Width or Balanced below */}
+                {projects.filter((p) => p.featured && p.id === 3).map((proj) => (
                     <ScrollReveal
                         key={proj.id}
-                        direction={fi % 2 === 0 ? "left" : "right"}
+                        direction="up"
                         delay={0.3}
-                        className="mb-6"
+                        className="mb-8"
                     >
                         <motion.div
                             whileHover={{ y: -4 }}
-                            className="relative glass rounded-3xl p-7 md:p-9 cursor-pointer overflow-hidden transition-all"
+                            className="relative glass rounded-2xl p-6 md:p-7 cursor-pointer overflow-hidden transition-all group"
                             onClick={() => setSelectedProject(proj)}
                             style={{
                                 border: `1px solid ${proj.color}20`,
-                                boxShadow: `0 0 40px ${proj.color}0D`,
+                                boxShadow: `0 0 30px ${proj.color}08`,
                             }}
-                            onMouseEnter={(e) => { e.currentTarget.style.border = `1px solid ${proj.color}50`; }}
-                            onMouseLeave={(e) => { e.currentTarget.style.border = `1px solid ${proj.color}20`; }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.border = `1px solid ${proj.color}`;
+                                e.currentTarget.style.boxShadow = `0 0 40px ${proj.color}25`;
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.border = `1px solid ${proj.color}20`;
+                                e.currentTarget.style.boxShadow = `0 0 30px ${proj.color}08`;
+                            }}
                         >
-                            {/* Featured badge */}
-                            <span className="absolute top-5 right-5 text-xs font-semibold px-3 py-1 rounded-full"
+                            <span className="absolute top-4 right-4 text-[10px] font-bold px-2 py-0.5 rounded-full z-10"
                                 style={{ background: `${proj.color}15`, color: proj.color, border: `1px solid ${proj.color}30` }}>
-                                ⭐ Featured Project
+                                ⭐ FEATURED
                             </span>
 
-                            {/* Background glow */}
-                            <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full blur-3xl pointer-events-none"
-                                style={{ background: `${proj.color}12` }} />
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                                <div>
-                                    <h3 className="font-heading text-2xl md:text-3xl font-bold text-white mb-1">{proj.title}</h3>
-                                    <p className="text-sm font-medium mb-4" style={{ color: proj.color }}>{proj.role}</p>
-                                    <p className="text-white/65 leading-relaxed mb-5 text-sm md:text-base">{proj.description}</p>
-                                    <div className="flex flex-wrap gap-2 mb-6">
+                            <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
+                                <div className="md:col-span-3">
+                                    <h3 className="font-heading text-xl md:text-2xl font-bold text-white mb-1">{proj.title}</h3>
+                                    <p className="text-xs font-semibold mb-3 tracking-wider uppercase" style={{ color: proj.color }}>{proj.role}</p>
+                                    <p className="text-white/60 leading-relaxed mb-5 text-sm">{proj.description}</p>
+                                    <div className="flex flex-wrap gap-1.5 mb-6">
                                         {proj.tech.map((t) => (
-                                            <span key={t} className="text-xs px-3 py-1 rounded-full font-medium"
+                                            <span key={t} className="text-[10px] px-2 py-0.5 rounded-md font-semibold"
                                                 style={{ background: `${proj.color}15`, color: proj.color }}>
                                                 {t}
                                             </span>
@@ -88,28 +175,27 @@ export default function Projects() {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             onClick={(e) => e.stopPropagation()}
-                                            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white transition-all"
-                                            style={{ background: `linear-gradient(135deg, ${proj.color}, #8B5CF6)` }}
+                                            className="px-6 py-2 rounded-lg text-xs font-bold text-white transition-all shadow-lg"
+                                            style={{ background: `linear-gradient(135deg, ${proj.color}, #F97316)` }}
                                         >
-                                            🌐 Live Demo
+                                            🌐 LIVE DEMO
                                         </a>
                                         <a
                                             href={proj.github}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             onClick={(e) => e.stopPropagation()}
-                                            className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border border-white/15 text-white hover:border-[#8B5CF6] transition-all"
+                                            className="px-6 py-2 rounded-lg text-xs font-bold border border-white/10 text-white hover:border-[#F97316] transition-all"
                                         >
-                                            🐙 GitHub
+                                            🐙 GITHUB
                                         </a>
                                     </div>
                                 </div>
-                                {/* Stats side */}
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="md:col-span-2 grid grid-cols-2 gap-3">
                                     {(proj.stats || []).map((stat) => (
-                                        <div key={stat.label} className="glass rounded-xl p-4 text-center">
-                                            <p className="text-white font-semibold text-sm">{stat.value}</p>
-                                            <p className="text-white/40 text-xs mt-1">{stat.label}</p>
+                                        <div key={stat.label} className="bg-white/5 rounded-xl p-3 text-center border border-white/5">
+                                            <p className="text-white font-bold text-xs">{stat.value}</p>
+                                            <p className="text-white/30 text-[10px] uppercase mt-1 tracking-tight">{stat.label}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -118,44 +204,36 @@ export default function Projects() {
                     </ScrollReveal>
                 ))}
 
-                {/* Other Project Cards */}
-                <ScrollReveal stagger={true} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {projects.filter((p) => !p.featured).map((proj) => (
+                {/* Other Projects - Infinite Auto-Rotating Carousel */}
+                <div className="relative mt-12 overflow-hidden py-10">
+                    <div className="flex w-max">
                         <motion.div
-                            key={proj.id}
-                            variants={revealItem}
-                            whileHover={{ y: -4 }}
-                            onClick={() => setSelectedProject(proj)}
-                            className="glass rounded-2xl p-6 cursor-pointer hover:border-white/20 transition-all"
+                            animate={{
+                                x: [0, -100 * (projects.filter(p => !p.featured).length)],
+                            }}
+                            transition={{
+                                x: {
+                                    repeat: Infinity,
+                                    repeatType: "loop",
+                                    duration: 40,
+                                    ease: "linear",
+                                },
+                            }}
+                            className="flex gap-6"
                         >
-                            <div className="flex items-start justify-between mb-3">
-                                <div>
-                                    <h3 className="font-heading font-bold text-xl text-white">{proj.title}</h3>
-                                    <span className="text-sm font-medium" style={{ color: proj.color }}>
-                                        {proj.role}
-                                    </span>
-                                </div>
-                                <div
-                                    className="w-3 h-3 rounded-full flex-shrink-0"
-                                    style={{ backgroundColor: proj.color, boxShadow: `0 0 8px ${proj.color}` }}
+                            {[...projects.filter((p) => !p.featured), ...projects.filter((p) => !p.featured)].map((proj, idx) => (
+                                <ProjectCard
+                                    key={`${proj.id}-${idx}`}
+                                    proj={proj}
+                                    setSelectedProject={setSelectedProject}
                                 />
-                            </div>
-                            <p className="text-white/60 text-sm leading-relaxed mb-4">{proj.description}</p>
-                            <div className="flex flex-wrap gap-2">
-                                {proj.tech.map((t) => (
-                                    <span
-                                        key={t}
-                                        className="text-xs px-2 py-0.5 rounded-full"
-                                        style={{ background: `${proj.color}15`, color: proj.color }}
-                                    >
-                                        {t}
-                                    </span>
-                                ))}
-                            </div>
+                            ))}
                         </motion.div>
-                    ))}
-                </ScrollReveal>
-
+                    </div>
+                    {/* Gradient Overlays for smooth edges */}
+                    <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#030014] to-transparent z-10 pointer-events-none" />
+                    <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#030014] to-transparent z-10 pointer-events-none" />
+                </div>
             </div>
 
             {/* Project Detail Modal */}
@@ -192,7 +270,7 @@ export default function Projects() {
                                     ×
                                 </button>
                             </div>
-                            <p className="text-white/70 leading-relaxed mb-6">{selectedProject.description}</p>
+                            <p className="text-white/70 leading-relaxed mb-6 text-sm">{selectedProject.description}</p>
                             <div className="flex flex-wrap gap-2 mb-6">
                                 {selectedProject.tech.map((t) => (
                                     <span
@@ -241,5 +319,55 @@ export default function Projects() {
                 )}
             </AnimatePresence>
         </section>
+    );
+}
+
+function ProjectCard({ proj, setSelectedProject }) {
+    return (
+        <motion.div
+            whileHover={{ y: -4, scale: 1.02 }}
+            onClick={() => setSelectedProject(proj)}
+            className="w-[350px] flex-shrink-0 glass rounded-2xl p-6 cursor-pointer overflow-hidden transition-all border border-white/5 active:scale-95"
+            style={{
+                border: `1px solid ${proj.color}20`,
+                boxShadow: `0 0 20px ${proj.color}05`,
+            }}
+            onMouseEnter={(e) => {
+                e.currentTarget.style.border = `1px solid ${proj.color}`;
+                e.currentTarget.style.boxShadow = `0 0 30px ${proj.color}20`;
+            }}
+            onMouseLeave={(e) => {
+                e.currentTarget.style.border = `1px solid ${proj.color}20`;
+                e.currentTarget.style.boxShadow = `0 0 20px ${proj.color}05`;
+            }}
+        >
+            <div className="flex items-start justify-between mb-3">
+                <div>
+                    <h3 className="font-heading font-bold text-xl text-white truncate w-[240px]">{proj.title}</h3>
+                    <span className="text-sm font-medium" style={{ color: proj.color }}>
+                        {proj.role}
+                    </span>
+                </div>
+                <div
+                    className="w-3 h-3 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: proj.color, boxShadow: `0 0 8px ${proj.color}` }}
+                />
+            </div>
+            <p className="text-white/60 text-sm leading-relaxed mb-4 line-clamp-2 h-10">{proj.description}</p>
+            <div className="flex flex-wrap gap-2">
+                {proj.tech.slice(0, 3).map((t) => (
+                    <span
+                        key={t}
+                        className="text-xs px-2 py-0.5 rounded-full"
+                        style={{ background: `${proj.color}15`, color: proj.color }}
+                    >
+                        {t}
+                    </span>
+                ))}
+                {proj.tech.length > 3 && (
+                    <span className="text-[10px] text-white/30 flex items-center">+{proj.tech.length - 3} more</span>
+                )}
+            </div>
+        </motion.div>
     );
 }

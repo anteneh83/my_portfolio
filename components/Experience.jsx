@@ -7,7 +7,7 @@ const experiences = [
         role: "Software Engineer Intern",
         company: "Eskalate LLC",
         period: "2023",
-        color: "#8B5CF6",
+        color: "#F97316",
         responsibilities: [
             "Built a job listing application using React and TypeScript",
             "Implemented Jest and Cypress testing suites",
@@ -19,7 +19,7 @@ const experiences = [
         role: "React Mentor",
         company: "Google Developer Groups (GDG)",
         period: "2023 – 2024",
-        color: "#22D3EE",
+        color: "#FB923C",
         responsibilities: [
             "Mentored 70+ students in React development",
             "Coached 8 developers individually to production-level projects",
@@ -31,7 +31,7 @@ const experiences = [
         role: "A2SV Software Engineering Fellow",
         company: "Africa to Silicon Valley (A2SV)",
         period: "2022 – Present",
-        color: "#EC4899",
+        color: "#F97316",
         responsibilities: [
             "Solved 400+ algorithmic challenges on LeetCode and Codeforces",
             "Built production-grade applications in team sprints",
@@ -46,17 +46,17 @@ export default function Experience() {
         <section id="experience" className="section-padding">
             <div className="max-w-7xl mx-auto">
                 <ScrollReveal className="text-center mb-16">
-                    <span className="text-[#22D3EE] text-sm font-medium tracking-widest uppercase">
+                    <span className="text-[#F97316] text-sm font-medium tracking-widest uppercase">
                         Where I&apos;ve Worked
                     </span>
                     <h2 className="font-heading text-4xl md:text-5xl font-bold mt-3">
-                        Work <span className="gradient-text">Experience</span>
+                        Work <span className="gradient-text !from-[#F97316] !to-[#FB923C]">Experience</span>
                     </h2>
                 </ScrollReveal>
 
                 <div className="relative">
                     {/* Vertical line */}
-                    <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#8B5CF6] via-[#22D3EE] to-transparent" />
+                    <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-[#F97316] via-[#FB923C] to-transparent" />
 
                     <ScrollReveal stagger={true} className="space-y-12">
                         {experiences.map((exp, i) => (
@@ -74,26 +74,34 @@ export default function Experience() {
 
                                 {/* Card */}
                                 <div className={`ml-16 md:ml-0 md:w-5/12 ${i % 2 === 0 ? "md:mr-auto md:pr-12" : "md:ml-auto md:pl-12"}`}>
-                                    <div className="glass rounded-2xl p-6 hover:border-white/20 transition-colors">
+                                    <motion.div
+                                        whileHover={{ scale: 1.02, y: -5 }}
+                                        className="glass rounded-2xl p-6 border border-white/5 hover:border-[#F97316]/50 transition-all duration-300 group cursor-default"
+                                    >
                                         <span
-                                            className="text-xs font-medium tracking-wide uppercase mb-2 block"
+                                            className="text-xs font-bold tracking-wider uppercase mb-2 block"
                                             style={{ color: exp.color }}
                                         >
                                             {exp.period}
                                         </span>
-                                        <h3 className="font-heading text-xl font-bold text-white mb-1">
+                                        <h3 className="font-heading text-xl font-bold text-white mb-1 group-hover:text-[#F97316] transition-colors">
                                             {exp.role}
                                         </h3>
-                                        <p className="text-white/50 text-sm mb-4">{exp.company}</p>
+                                        <p className="text-white/50 text-sm mb-4 font-medium">{exp.company}</p>
                                         <ul className="space-y-2">
-                                            {exp.responsibilities.map((r) => (
-                                                <li key={r} className="flex items-start gap-2 text-white/70 text-sm">
-                                                    <span style={{ color: exp.color }} className="mt-1 flex-shrink-0">▸</span>
+                                            {exp.responsibilities.map((r, idx) => (
+                                                <motion.li
+                                                    key={r}
+                                                    initial={{ opacity: 0.7 }}
+                                                    whileHover={{ opacity: 1, x: 4 }}
+                                                    className="flex items-start gap-2 text-white/70 text-sm group-hover:text-white/90 transition-all"
+                                                >
+                                                    <span style={{ color: exp.color }} className="mt-1 flex-shrink-0 font-bold group-hover:scale-125 transition-transform">▸</span>
                                                     {r}
-                                                </li>
+                                                </motion.li>
                                             ))}
                                         </ul>
-                                    </div>
+                                    </motion.div>
                                 </div>
                             </motion.div>
                         ))}

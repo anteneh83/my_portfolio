@@ -2,13 +2,15 @@
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
+import { SiGithub, SiTelegram, SiGmail } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa6";
 import ScrollReveal, { revealItem } from "./ScrollReveal";
 
 const socials = [
-    { label: "GitHub", icon: "🐙", href: "https://github.com/anteneh83", color: "#ffffff" },
-    { label: "LinkedIn", icon: "💼", href: "https://www.linkedin.com/in/antig74/", color: "#0A66C2" },
-    { label: "Telegram", icon: "✈️", href: "https://t.me/Yours_2123", color: "#229ED9" },
-    { label: "Email", icon: "📧", href: "mailto:antenehgetnet83@gmail.com", color: "#EC4899" },
+    { label: "GitHub", icon: SiGithub, href: "https://github.com/anteneh83", color: "#ffffff" },
+    { label: "LinkedIn", icon: FaLinkedin, href: "https://www.linkedin.com/in/antig74/", color: "#0A66C2" },
+    { label: "Telegram", icon: SiTelegram, href: "https://t.me/Yours_2123", color: "#229ED9" },
+    { label: "Email", icon: SiGmail, href: "mailto:antenehgetnet83@gmail.com", color: "#EA4335" },
 ];
 
 export default function Contact() {
@@ -138,25 +140,30 @@ export default function Contact() {
                             </p>
                         </ScrollReveal>
                         <ScrollReveal direction="right" delay={0.4} stagger={true} className="space-y-4">
-                            {socials.map((s) => (
-                                <motion.a
-                                    key={s.label}
-                                    href={s.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    variants={revealItem}
-                                    whileHover={{ x: 6 }}
-                                    className="flex items-center gap-4 glass rounded-xl px-5 py-4 hover:border-white/20 transition-all group"
-                                >
-                                    <span className="text-2xl">{s.icon}</span>
-                                    <span className="text-white font-medium group-hover:text-[#8B5CF6] transition-colors">
-                                        {s.label}
-                                    </span>
-                                    <span className="ml-auto text-white/30 group-hover:text-[#8B5CF6] transition-colors">
-                                        →
-                                    </span>
-                                </motion.a>
-                            ))}
+                            {socials.map((s) => {
+                                const Icon = s.icon;
+                                return (
+                                    <motion.a
+                                        key={s.label}
+                                        href={s.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        variants={revealItem}
+                                        whileHover={{ x: 6 }}
+                                        className="flex items-center gap-4 glass rounded-xl px-5 py-4 hover:border-white/20 transition-all group"
+                                    >
+                                        <span className="text-2xl" style={{ color: s.color }}>
+                                            <Icon />
+                                        </span>
+                                        <span className="text-white font-medium group-hover:text-[#8B5CF6] transition-colors">
+                                            {s.label}
+                                        </span>
+                                        <span className="ml-auto text-white/30 group-hover:text-[#8B5CF6] transition-colors">
+                                            →
+                                        </span>
+                                    </motion.a>
+                                );
+                            })}
                         </ScrollReveal>
                     </div>
                 </div>
