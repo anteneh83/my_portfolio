@@ -54,23 +54,49 @@ export default function AntenehAI() {
     return (
         <>
             {/* Floating button */}
-            <motion.button
-                id="anteneh-ai-btn"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 2, type: "spring" }}
-                onClick={() => setOpen(true)}
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.95 }}
-                className="fixed bottom-6 right-6 z-40 flex items-center gap-2 px-5 py-3 rounded-full font-medium text-sm shadow-xl"
-                style={{
-                    background: "linear-gradient(135deg, #8B5CF6, #22D3EE)",
-                    boxShadow: "0 0 24px rgba(139,92,246,0.5)",
-                }}
-            >
-                <span>🤖</span>
-                <span className="hidden sm:inline">Anteneh AI</span>
-            </motion.button>
+            <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+                <AnimatePresence>
+                    {!open && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+                            transition={{ delay: 3, duration: 0.5 }}
+                            className="relative"
+                        >
+                            <div
+                                className="bg-slate-900/90 backdrop-blur-md border border-[#8B5CF6]/30 text-white text-xs px-4 py-2 rounded-2xl whitespace-nowrap shadow-2xl mr-2"
+                                style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.4)" }}
+                            >
+                                <span className="text-[#22D3EE] font-medium">Hey! 👋</span> Get info easily by asking me!
+                                {/* Speech bubble tail */}
+                                <div
+                                    className="absolute -bottom-1.5 right-6 w-3 h-3 bg-slate-900 border-r border-b border-[#8B5CF6]/30 rotate-45"
+                                    style={{ background: "rgba(15,23,42,0.97)" }}
+                                />
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                <motion.button
+                    id="anteneh-ai-btn"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 2, type: "spring" }}
+                    onClick={() => setOpen(true)}
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 px-5 py-3 rounded-full font-medium text-sm shadow-xl"
+                    style={{
+                        background: "linear-gradient(135deg, #8B5CF6, #22D3EE)",
+                        boxShadow: "0 0 24px rgba(139,92,246,0.5)",
+                    }}
+                >
+                    <span>🤖</span>
+                    <span className="hidden sm:inline">Anteneh AI</span>
+                </motion.button>
+            </div>
 
             {/* Chat Panel */}
             <AnimatePresence>
@@ -123,8 +149,8 @@ export default function AntenehAI() {
                                 >
                                     <div
                                         className={`max-w-[85%] text-sm px-3 py-2 rounded-2xl whitespace-pre-line leading-relaxed ${msg.role === "user"
-                                                ? "text-white rounded-br-sm"
-                                                : "text-white/90 rounded-bl-sm border border-white/10"
+                                            ? "text-white rounded-br-sm"
+                                            : "text-white/90 rounded-bl-sm border border-white/10"
                                             }`}
                                         style={
                                             msg.role === "user"
