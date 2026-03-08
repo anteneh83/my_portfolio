@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import { skillCategories } from "@/data/skills";
-import SkillsCloud from "./three/SkillsCloud";
 import ScrollReveal, { revealItem } from "./ScrollReveal";
 
 export default function Skills() {
