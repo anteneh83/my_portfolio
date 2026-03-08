@@ -32,12 +32,14 @@ export const metadata = {
 };
 
 import CustomCursor from "@/components/CustomCursor";
+import SkillBackground from "@/components/SkillBackground";
 
 export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
             <body className="bg-[#0F172A] font-body text-white antialiased overflow-x-hidden cursor-none">
                 <CustomCursor />
+                <SkillBackground />
                 {children}
             </body>
         </html>

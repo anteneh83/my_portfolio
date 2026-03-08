@@ -26,14 +26,7 @@ export default function Skills() {
                     </p>
                 </ScrollReveal>
 
-                {/* 3D Skills Cloud */}
-                <ScrollReveal direction="up" delay={0.3} duration={1} className="mb-20 glass rounded-3xl overflow-hidden border border-white/5 relative">
-                    <SkillsCloud />
-                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-pulse" />
-                        <span className="text-[10px] uppercase tracking-tighter text-white/60 font-medium">Interactive 3D Skills Orbit</span>
-                    </div>
-                </ScrollReveal>
+                {/* Skills content is now category based, 3D cloud removed per user request */}
 
                 {/* Categories Grid */}
                 <ScrollReveal stagger={true} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
