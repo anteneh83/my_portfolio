@@ -8,7 +8,7 @@ function ProjectCard({ project, index, total, onSelect }) {
     const ref = useRef();
     const [hovered, setHovered] = useState(false);
     const angle = (index / total) * Math.PI * 2;
-    const radius = 3.5;
+    const radius = 5.5; // Increased from 3.5
     const x = Math.cos(angle) * radius;
     const z = Math.sin(angle) * radius;
 
@@ -29,7 +29,7 @@ function ProjectCard({ project, index, total, onSelect }) {
     return (
         <group position={[x, 0, z]} rotation={[0, -angle + Math.PI / 2, 0]} ref={ref}>
             <RoundedBox
-                args={[2.2, 1.4, 0.12]}
+                args={[2.0, 1.3, 0.12]} // Reduced from [2.2, 1.4]
                 radius={0.08}
                 smoothness={4}
                 onClick={() => onSelect(project)}
@@ -99,7 +99,7 @@ function ProjectCard({ project, index, total, onSelect }) {
 export default function ProjectScene({ onSelect }) {
     return (
         <Canvas
-            camera={{ position: [0, 2.5, 9], fov: 55 }}
+            camera={{ position: [0, 2.5, 12.5], fov: 55 }}
             dpr={[1, 2]}
             style={{ background: "transparent" }}
         >
