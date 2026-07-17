@@ -31,6 +31,13 @@ const achievements = [
         desc: "Selected for the prestigious Google-backed A2SV program, solving 400+ algorithmic problems.",
         color: "#EC4899",
     },
+    {
+        icon: "🥇",
+        title: "Hackathon Finalist — የነገው ቀን ሃካቶን",
+        subtitle: "48-Hour Hackathon Challenge (September 8–10, 2025)",
+        desc: "Awarded Finalist recognition in the 'የነገው ቀን ሃካቶን' 48-Hour Hackathon Challenge for outstanding innovation, teamwork, and project presentation.",
+        color: "#10B981",
+    },
 ];
 
 export default function Achievements() {
