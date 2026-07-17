@@ -19,6 +19,8 @@ const ProjectScene = dynamic(() => import("@/components/three/ProjectScene"), {
 
 export default function Projects() {
     const [selectedProject, setSelectedProject] = useState(null);
+    const otherProjects = projects.filter((p) => !p.featured);
+    const loopScrollDistance = otherProjects.length * 356;
 
     return (
         <section id="projects" className="section-padding">
@@ -209,7 +211,7 @@ export default function Projects() {
                     <div className="flex w-max">
                         <motion.div
                             animate={{
-                                x: [0, -100 * (projects.filter(p => !p.featured).length)],
+                                x: [0, -loopScrollDistance],
                             }}
                             transition={{
                                 x: {
@@ -221,7 +223,7 @@ export default function Projects() {
                             }}
                             className="flex gap-6"
                         >
-                            {[...projects.filter((p) => !p.featured), ...projects.filter((p) => !p.featured)].map((proj, idx) => (
+                            {[...otherProjects, ...otherProjects].map((proj, idx) => (
                                 <ProjectCard
                                     key={`${proj.id}-${idx}`}
                                     proj={proj}

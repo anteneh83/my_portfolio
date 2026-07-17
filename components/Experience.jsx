@@ -4,6 +4,21 @@ import ScrollReveal, { revealItem } from "./ScrollReveal";
 
 const experiences = [
     {
+        role: "Full-Stack Software Developer",
+        company: "Red Cloud ICT Solutions PLC",
+        period: "July 2026 – Current",
+        color: "#0EA5E9",
+        responsibilities: [
+            "Working as a Software Developer at Red Cloud ICT Solutions, contributing to the design, development, and maintenance of web-based software products.",
+            "Collaborating in an agile team environment to deliver reliable, user-focused features across the full stack.",
+            "Developing and maintaining RESTful APIs and frontend components based on project requirements and technical specifications.",
+            "Participating in code reviews, providing constructive feedback, and incorporating senior developer guidance to improve code quality.",
+            "Writing unit and integration tests to ensure reliability and catch regressions early in the development cycle.",
+            "Troubleshooting and debugging issues across the codebase, documenting findings and fixes for future reference.",
+            "Collaborating with cross-functional teams to translate business requirements into clean, maintainable technical solutions using React, Next.js, Node.js, Express.js, MongoDB, and Git.",
+        ],
+    },
+    {
         role: "Software Engineer Intern",
         company: "Eskalate LLC",
         period: "2023",
